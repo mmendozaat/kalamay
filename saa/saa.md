@@ -1,0 +1,6 @@
+53
+VPC
+EC2
+S3
+RDS
+SQS
