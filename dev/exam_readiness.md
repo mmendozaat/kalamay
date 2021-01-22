@@ -152,7 +152,13 @@ AWS STS
 - SAML 2.0 - security assertion markup language
   - MS AD, LDAP, OpenLDAP
   
-Test Axioms
+Flow for SAML
+> login > authenticate > get saml assertion > use saml assertion to connect to aws
+
+Flow for Web Federation
+> login > authenticate > get token > use token to connect to aws
+
+#### Test Axioms
 - Lock down master account
 - security groups allow only, nacls explicit deny
 - prefer iam roles over access keys
@@ -171,8 +177,8 @@ Test Axioms
 - bucket
   - global namespace
   - region-based
-- path-style URL
-- virtual hosted-style URL
+- path-style URL - bucket name in path - old
+- virtual hosted-style URL - bucket name in subdomain
 - pre-signed URL
 - Cross Origin Resource Sharing (CORS)
 
@@ -186,8 +192,16 @@ Primary key
 - partition key (previously hash key)
 - sort key (optional) (previously range key)
 
-tables - items - attributes
+- tables
+  - items
+    - attributes
 
+Secondary Indexes
+- attribute projetion
+  - KEYS_ONLY
+  - INCLUDE <attribute>
+  - ALL - includes all attributes
+  
 LSI 
 - local secondary indexes
 - partition key + different sort keys
@@ -195,6 +209,7 @@ LSI
 GSI
 - global secondary indexes
 - partition key +/ sort key different from table
+- separate provision
 
 Throughput
 - RCU - read capacity units
@@ -204,6 +219,7 @@ Throughput
 - WCU - write capacity units
   - up to 1KB size per item
   - writes per second
+- capacity split by partition key
 
 RCU Calculations
 - 25 strongly consistent reads/sec of 15kb
@@ -233,6 +249,7 @@ Dynamo DB Streams
 - millisecond latency
 - strictly ordered
 - exactly once
+- required for global tables
 
 Features
 - conditional write operations
@@ -243,7 +260,7 @@ Features
   
 DAX
 - dynamo db accelerator
-- eventually consistent reads - microseconds
+- eventually consistent reads - microseconds - millions requests/s
 - in-memory cache
 - minimal application changes
 - read-through, write-through cache
@@ -255,7 +272,19 @@ DAX
   - same data in all replicas
   - changes to to streams then to replicas
 
-*milli - 10E-3, micro - 10E-6, nano - 10E-9
+- milli - 10E-3, micro - 10E-6, nano - 10E-9
+
+Global Tables
+- data replication
+- read and write on replica
+- changes in stream
+
+*Review notes:*
+- RCU/WCU calcuations
+- scan vs query
+  - page size max 1MB
+  - use limit parameter to set page size
+- cloudwatch mtrics
 
 Operations
 - Scan
@@ -271,11 +300,23 @@ persistencce | no | yes
 delivery | push (passive) | poll (active)
 producer/consumer | publish/subscribe (1:N) | send/receive (1:1)
 
-*****
+- processes should be idempotent
+  - processing same message 2x should have the same result
+  
+*Review Notes*
 - sqs parameters
-
+  - visibility timeout - time message received is invisibile to other consumers
+  - receive message wait time - max time long poll receive call waits for message
+  - message retention period - time message is retained in queue before deleted
+  - delay seconds - delay message delivery
+  
 #### Step Functions
 
+- state machine
+- workflow for business logic
+- build quickly
+- scale, recover reliably
+- modify quickly
 - coordinate distributed applications and microservices
 - visualize and track executions
 - built-in retry or fallback
@@ -287,14 +328,22 @@ Amazon State Language
 #### API Gateway
 
 - API Gateway Cache
+  - lambda
+  - ec2
+  - other http endpoints
 
 #### Caching Soluions
 
-cache S3 -  cloudfront
-cache session state on web tier- dynamo db
-cache data between db and app - elasticache
+edge side - cache S3 -  cloudfront
+server side - cache session state on web tier- dynamo db
+server side - cache data between db and app - elasticache
 
 **CloudFront**
+
+origin server
+- s3
+- ec2
+- elb
 
 Cache Behavior
 - path patterns
@@ -311,8 +360,23 @@ Security
 - cookies/URLs hashed and signed using private key from key pair
 
 **ElastiCache**
+
+key-value engines
 - memcached
 - Redis
+
+- cluster
+- node
+- repliccation group
+  - asynchronous
+- endpoint
+
+caching strategies
+- in app
+- lazy loading
+  - check cache first
+- write through
+  - update database always updates the cache
 
 #### Container Services
 
@@ -348,6 +412,9 @@ Security
 ### Domain 4 - Refactoring
 
 #### Automate your environment
+
+#### Design Services not servers
+#### Use caching
 #### Avoid single points of failure
 - use db replication
 - use caching
@@ -374,6 +441,9 @@ Gartners 6 R's of migration
 - Retain
 - Retire
 
+AWS Application Discovery Service
+- discover on-prem applications for migration
+
 #### Test Axioms
 - durability != availability
 - scalability != elasticity
@@ -384,8 +454,8 @@ Gartners 6 R's of migration
 ### Domain 5 - Monitoring and Troubleshooting
 
 - check error codes
-  - 400 series - error handling
-  - 500 series - retry operation
+  - 400 series - error handling - application error
+  - 500 series - retry operation - service error
 - instance logs
   - system logs
   - http logs
@@ -397,13 +467,17 @@ Gartners 6 R's of migration
   - unused or underused instances
   
 #### CloudTrail
-- logs to s3
+- logs to s3 - encrypted
+- logs api calls
   
 #### X-Ray
 - analyze and debug distributed applications
 - tracks requests
-- create a service map
-  
+- create a `service map`
+- dependencies
+- bottlenecks
+- performance
+
 S3 object size limit - 5TB
  
 Dynamo DB provisioned throughput limits - limited by partition key
