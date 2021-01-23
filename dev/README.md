@@ -6,11 +6,11 @@
 
 ### FAQs
 
-- [ ] [Amazon Simple Queue Service](https://aws.amazon.com/sqs/faqs/)
-
 - [ ] [Amazon DynamoDB](https://aws.amazon.com/dynamodb/faqs/)
 
 - [ ] [Amazon ElastiCache](https://aws.amazon.com/elasticache/faqs/)
+
+- [ ] [Amazon Simple Queue Service](https://aws.amazon.com/sqs/faqs/)
 
 - [ ] [Amazon Kinesis](https://aws.amazon.com/kinesis/data-streams/faqs/)
 
