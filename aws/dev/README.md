@@ -31,16 +31,16 @@
 
 ### White Papers
 
-- [ ] [AWS_Blue_Green_Deployments](AWS_Blue_Green_Deployments.pdf)
+- [ ] [AWS_Blue_Green_Deployments](whitepapers/AWS_Blue_Green_Deployments.pdf)
 
-- [x] [AWS_Well-Architected_Framework](AWS_Well-Architected_Framework.pdf)
+- [x] [AWS_Well-Architected_Framework](whitepapers/AWS_Well-Architected_Framework.pdf)
 
-- [ ] [microservices-on-aws](microservices-on-aws.pdf)
+- [ ] [microservices-on-aws](whitepapers/microservices-on-aws.pdf)
 
-- [ ] [optimizing-enterprise-economics-serverless-architectures](optimizing-enterprise-economics-serverless-architectures.pdf)
+- [ ] [optimizing-enterprise-economics-serverless-architectures](whitepapers/optimizing-enterprise-economics-serverless-architectures.pdf)
 
-- [ ] [practicing-continuous-integration-continuous-delivery-on-AWS](practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+- [ ] [practicing-continuous-integration-continuous-delivery-on-AWS](whitepapers/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
 
-- [ ] [running-containerized-microservices-on-aws](running-containerized-microservices-on-aws.pdf)
+- [ ] [running-containerized-microservices-on-aws](whitepapers/running-containerized-microservices-on-aws.pdf)
 
-- [ ] [serverless-architectures-with-aws-lambda](serverless-architectures-with-aws-lambda.pdf)
+- [ ] [serverless-architectures-with-aws-lambda](whitepapers/serverless-architectures-with-aws-lambda.pdf)

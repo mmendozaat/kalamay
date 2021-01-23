@@ -24,10 +24,10 @@
 
 ### White Papers
 
-[AWS_Well-Architected_Framework](AWS_Well-Architected_Framework.pdf)
+[AWS_Well-Architected_Framework](whitepapers/AWS_Well-Architected_Framework.pdf)
 
-[aws-amazon-vpc-connectivity-options](aws-amazon-vpc-connectivity-options.pdf)
+[aws-amazon-vpc-connectivity-options](whitepapers/aws-amazon-vpc-connectivity-options.pdf)
 
-[aws-security-whitepaper](aws-security-whitepaper.pdf)
+[aws-security-whitepaper](whitepapers/aws-security-whitepaper.pdf)
 
-[aws_pricing_overview](aws_pricing_overview.pdf)
+[aws_pricing_overview](whitepapers/aws_pricing_overview.pdf)
