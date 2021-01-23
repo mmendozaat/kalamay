@@ -28,7 +28,7 @@
 
 - [ ] [AWS_Blue_Green_Deployments](AWS_Blue_Green_Deployments.pdf)
 
-- [ ] [AWS_Well-Architected_Framework](AWS_Well-Architected_Framework.pdf)
+- [x] [AWS_Well-Architected_Framework](AWS_Well-Architected_Framework.pdf)
 
 - [ ] [microservices-on-aws](microservices-on-aws.pdf)
 
