@@ -1,0 +1,113 @@
+CodePipeline
+- state changes -> Cloudwatch Events
+- stage
+  - action group
+    - can be manual approval
+    - sequential or parallel action groups
+- CodeCommmit
+  - notifications
+    - SNS/Lambda
+      - master branch push
+      - branch delete
+      - etc
+    - Cloudwatch Event Rules
+      - pull request events
+      - commit comment event
+      - goes to SNS
+- CodeBuild
+  - managed build service
+  - continuous scaling
+  - docker under the hood
+  - secure
+    - KMS - encrypt artifacts
+    - IAM
+    - CloudTrail
+  - `buildspec.yml`
+    - environment variables
+    - secrets from SSM Parameter Store
+    - stages
+      - install -  dependencies
+      - pre build - run before build
+      - build - build
+      - post build - finishing touches
+      - cache to S3
+  - CodeBuild Agent to build locally
+  - CodeBuild Container
+    - docker image
+    - runs `buildspec.yml`
+    - can pull from AWS S3 - cache bucket
+    - artifacts to s3 bucket
+- CodeDeploy
+  - CodeDeploy Agent in EC2 instance
+    - grouped - dev/test/prod
+  - agent polls CodeDeploy for work
+  - CodeDEploy sends `appspec.yml`
+  - agent - pulls code from github/s3
+    - run deployment instructions
+    - report success/failure
+  - AppSpec
+    - File - where is the source (s3/github)
+      - source
+      - destination
+    - hooks - instructions
+      - ApplicationStop
+      - DownloadBundle
+      - BeforeInstall
+      - Install
+      - AfterInstall
+      - ApplicationStart
+      - ValidateService
+      - BeforeAllowTraffic
+      - AllowTraffic
+      - AfterAllowTraffic
+  - Deployment Config
+    - Targets
+      - EC2 by tags
+      - Direct to ASG
+    - Deploys to failed instances first
+    - types
+      - In Place Deployment
+        - CodeDeployDefault.OneAtATime
+        - CodeDeployDefault.HalfAtATime
+        - CodeDeployDefault.AllAtOnce
+      - blue/green
+        - percentage
+        - number
+    - deploy to ASG
+      - requires an ELB
+      - creates a new ASG - copies settings
+  - Rollbacks
+    - when fails
+    - when threshold met
+    - can be disabled
+    - redeploys last known good revision as a new deployment
+
+CodeStar
+  - use project template
+  - wrapper around everything
+    - github
+    - codecommit, codebuild, codedeploy, codepipeline
+    - cloudformation
+    - cloudwatch
+  - create CICD-ready projects
+  - integrated with
+    - jira/github issue trecking
+    - cloud9 - web IDE
+    - dashboard
+  - limited customization
+
+CodeCommit
+- encrypted automatically
+- encrypted in transit
+  - HTTPS
+  - SSH
+
+Cross Accout access
+- use IAM role and STS (AssumeRole)
+
+Credentials for git
+- IAM user
+  - upload SSH public key
+  - or genereate https git credentials
+    - generates up to 2 user/password pairs
+
