@@ -33,4 +33,5 @@
   echo "export PYSPARK_DRIVER_PYTHON_OPTS=notebook" >> ~/.bashrc
   echo 'alias pyspark="pyspark --packages com.johnsnowlabs.nlp:spark-nlp_2.11:2.7.4"' >> ~/.bashrc
   ```
-6. Invoke `pyspark`. Open new notebook using kernel `py37`
+6. You can now start jupyter notebook with Spark using `pyspark`. To activate the settings added to `~/.bashrc` without starting a new terminal session, issue a `source ~/.bashrc` first before invoking `pyspark`. 
+7. Use `py37` kernel in jupyter when creating a new notebook.
