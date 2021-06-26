@@ -69,3 +69,8 @@ bq load \
 nyctaxi.2018trips \
 gs://cloud-training/OCBL013/nyc_tlc_yellow_trips_2018_subset_2.csv
 ```
+
+**get project id**
+```
+export DEVSHELL_PROJECT_ID=$(gcloud config get-value project)
+```
