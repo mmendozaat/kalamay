@@ -30,3 +30,27 @@ Cloud Spanner
 
 BigTable >~ Cloud Datastore
 Cloud Spanner >~ Cloud SQL
+
+Cloud Dataproc
+- managed Hadoop
+- Spark, Hive and Pig
+- billed by the second, min 1 minute
+- Manage cluster-size yourself
+
+Cloud Dataflow
+- Clusters are sized for you
+- optimized partitioning
+- don't worry about hot keys
+
+BigQuery
+- fully managed data warehouse
+- separate storage and compute
+- automatically drops storage cost > 90 days
+
+PubSub
+- at least once delivery
+- 1M messages/s
+- pairs well with Dataflow
+
+Cloud Datalab
+- jupyter notebooks
